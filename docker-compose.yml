@@ -1,0 +1,35 @@
+version: '3'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Front-end/Dockerfile.frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+  backend:
+    build:
+      context: .
+      dockerfile: Back-end/Dockerfile.backend
+    ports:
+      - "9090:9090"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/demo_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ''
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQL5Dialect
+      SPRING_JPA_SHOW_SQL: "true"
+      SERVER_PORT: 9090
+  mysql:
+    image: mysql:latest
+    restart: always
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_DATABASE: demo_db
