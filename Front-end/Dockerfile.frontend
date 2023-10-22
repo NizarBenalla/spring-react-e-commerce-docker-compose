@@ -10,4 +10,8 @@ COPY Front-end/ .
 
 EXPOSE 3000
 
+RUN addgroup -S myappgroup && adduser -S myappuser -G myappgroup && mkdir -p /app/node_modules/.cache && chmod -R 777 /app/node_modules/.cache
+
+USER myappuser
+
 CMD ["npm", "start"]
