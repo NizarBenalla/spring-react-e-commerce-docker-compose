@@ -1,7 +1,10 @@
 FROM maven:3.9-amazoncorretto-17 AS MAVEN_BUILD
+
 WORKDIR /app
+
 COPY Back-end/. .
-RUN mvn clean install  # Use ./mvnw for Maven Wrapper
+
+RUN mvn clean install
 
 FROM openjdk:17-slim
 

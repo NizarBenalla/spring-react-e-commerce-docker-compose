@@ -20,17 +20,17 @@ To run this project locally, follow these steps:
 2. **Clone the Repository**: Clone this repository to your local machine using the following command:
 
    ```shell
-   git clone https://github.com/your-username/your-project.git
+   git clone https://github.com/NizarBenalla/spring-react-e-commerce-docker-compose.git
 
 3. Navigate to Project Directory: Change your current directory to the project directory:
 
     ```shell
-    cd your-project/
+    cd spring-react-e-commerce-docker-compose/
     ```
-4. Run Docker Compose: Start the project using Docker Compose:
+4. Run Docker Compose: Start the project using Docker Compose (v2):
 
     ```shell
-    docker-compose up
+    docker compose up
     ```
 This command will build and start the necessary containers for your application.
 
