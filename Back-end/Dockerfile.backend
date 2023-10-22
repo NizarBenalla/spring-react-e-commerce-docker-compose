@@ -1,9 +1,10 @@
-FROM maven:3.8.4-openjdk-17-slim AS MAVEN_BUILD
+FROM maven:3.9-amazoncorretto-17 AS MAVEN_BUILD
+WORKDIR /app
+COPY Back-end/. .
+RUN mvn clean install  # Use ./mvnw for Maven Wrapper
 
-COPY Back-end/. /build/
+FROM openjdk:17-slim
 
-WORKDIR /build/
+COPY --from=MAVEN_BUILD /app/target/demo-0.0.1-SNAPSHOT.jar /app.jar
 
-RUN mvn clean install
-
-CMD mvn spring-boot:run
+CMD ["java", "-jar", "/app.jar"]
